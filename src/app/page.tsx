@@ -1,11 +1,5 @@
-import { landingSections } from "@/components/sections";
+import { WeatherDashboard } from "@/components/weather/WeatherDashboard";
 
 export default function HomePage() {
-  return (
-    <main className="flex-1">
-      {landingSections.map(({ id, Component }) => (
-        <Component key={id} />
-      ))}
-    </main>
-  );
+  return <WeatherDashboard />;
 }
