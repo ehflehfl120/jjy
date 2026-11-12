@@ -110,8 +110,8 @@ export const landing: LandingContent = {
     "headerTitle": "로앤파트너스 법률사무소",
     "logoImage": "",
     "description": "빌려준 돈, 아직도 못 받고 계신가요? 지급명령부터 압류까지 진행 방향을 안내해드립니다.",
-    "kakaoUrl": "https://pf.kakao.com/",
-    "floatingCtaLabel": "카카오톡 무료 상담"
+    "kakaoUrl": "https://pf.kakao.com/_bxdxmEX/chat",
+    "floatingCtaLabel": "회수가능여부 확인하기"
   },
   "sections": [
     {
