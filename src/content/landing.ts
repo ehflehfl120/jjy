@@ -106,7 +106,7 @@ export type LandingContent = {
 
 export const landing: LandingContent = {
   "site": {
-    "name": "채봄머니",
+    "name": "로앤파트너스 법률사무소",
     "headerTitle": "로앤파트너스 법률사무소",
     "logoImage": "",
     "description": "빌려준 돈, 아직도 못 받고 계신가요? 지급명령부터 압류까지 진행 방향을 안내해드립니다.",
