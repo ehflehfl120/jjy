@@ -4,42 +4,27 @@ import { footer, legal, site } from "@/content/landing";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-slate-200 bg-slate-50">
-      <div className={`${pageContainerClass} flex flex-col gap-8 py-12`}>
+    <footer className="mt-auto border-t border-[#E5E8EB] bg-white pb-24">
+      <div className={`${pageContainerClass} flex flex-col gap-6 py-10`}>
         <div className="min-w-0">
-          <p className="text-lg font-bold text-slate-900">{site.logoText}</p>
-          <ul className="mt-4 space-y-2 text-base leading-7 text-slate-600">
+          <p className="text-base font-bold text-[#191F28]">{site.name}</p>
+          <ul className="mt-3 space-y-1 text-[13px] leading-6 text-[#6B7684]">
             {footer.company.map((item) => (
               <li key={item.label}>
-                <span className="font-medium text-slate-800">{item.label}</span>{" "}
-                {item.value}
+                <span className="font-medium text-[#4E5968]">{item.label}</span> {item.value}
               </li>
             ))}
           </ul>
         </div>
-
-        <nav
-          aria-label="법적 고지"
-          className="flex flex-col items-start gap-1 text-base font-medium"
-        >
-          <Link
-            href="/privacy"
-            className="inline-flex min-h-12 items-center text-slate-700 hover:text-blue-700"
-          >
+        <nav aria-label="법적 고지" className="flex gap-4 text-[13px] font-medium">
+          <Link href="/privacy" className="inline-flex min-h-12 items-center text-[#191F28]">
             {legal.privacy.title}
           </Link>
-          <Link
-            href="/terms"
-            className="inline-flex min-h-12 items-center text-slate-700 hover:text-blue-700"
-          >
+          <Link href="/terms" className="inline-flex min-h-12 items-center text-[#191F28]">
             {legal.terms.title}
           </Link>
         </nav>
-      </div>
-      <div className="border-t border-slate-200">
-        <p className={`${pageContainerClass} py-4 text-sm leading-6 text-slate-500`}>
-          {footer.copyright}
-        </p>
+        <p className="text-[12px] leading-5 text-[#8B95A1]">{footer.copyright}</p>
       </div>
     </footer>
   );

@@ -1,5 +1,13 @@
-import { WeatherDashboard } from "@/components/weather/WeatherDashboard";
+import { FloatingCta } from "@/components/layout/FloatingCta";
+import { landingSections } from "@/components/sections";
 
 export default function HomePage() {
-  return <WeatherDashboard />;
+  return (
+    <main className="flex-1">
+      {landingSections.map(({ id, Component }) => (
+        <Component key={id} />
+      ))}
+      <FloatingCta />
+    </main>
+  );
 }

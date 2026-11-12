@@ -1,30 +1,27 @@
-import { processSection } from "@/content/landing";
 import { SectionShell } from "@/components/ui/SectionShell";
+import { landing } from "@/content/landing";
 
 export function ProcessSection() {
+  const p = landing.process;
+
   return (
-    <SectionShell
-      id={processSection.id}
-      eyebrow={processSection.eyebrow}
-      title={processSection.title}
-      description={processSection.description}
-      tone="muted"
-    >
-      <ol className="grid grid-cols-1 gap-4">
-        {processSection.steps.map((step) => (
-          <li
-            key={step.step}
-            className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5"
-          >
-            <p className="text-sm font-bold tracking-wide text-blue-700">
-              {step.step}
-            </p>
-            <h3 className="mt-3 text-lg font-semibold text-slate-900">
-              {step.title}
-            </h3>
-            <p className="mt-3 text-base leading-7 text-slate-600">
-              {step.description}
-            </p>
+    <SectionShell id="process" eyebrow={p.eyebrow} title={p.title} description={p.description}>
+      <ol className="relative text-left">
+        {p.steps.map((step, index) => (
+          <li key={step.title} className="relative flex gap-4 pb-6 last:pb-0">
+            {index < p.steps.length - 1 ? (
+              <span className="absolute left-[17px] top-9 bottom-0 w-0.5 bg-[#E5E8EB]" aria-hidden />
+            ) : null}
+            <span className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#3182F6] text-[13px] font-bold text-white">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <div className="min-w-0 pt-1">
+              <p className="text-[12px] font-bold tracking-wide text-[#3182F6]">
+                STEP {String(index + 1).padStart(2, "0")}
+              </p>
+              <h3 className="mt-1 text-[17px] font-bold leading-6 text-[#191F28]">{step.title}</h3>
+              <p className="mt-1 text-[15px] leading-6 text-[#6B7684]">{step.description}</p>
+            </div>
           </li>
         ))}
       </ol>

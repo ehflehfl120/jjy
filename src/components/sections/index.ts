@@ -1,24 +1,30 @@
 import type { ComponentType } from "react";
-import { BenefitsSection } from "@/components/sections/BenefitsSection";
+import { AmountSection } from "@/components/sections/AmountSection";
+import { CasesSection } from "@/components/sections/CasesSection";
+import { CtaSection } from "@/components/sections/CtaSection";
+import { EligibilitySection } from "@/components/sections/EligibilitySection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { InformationSection } from "@/components/sections/InformationSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
+import { StatsSection } from "@/components/sections/StatsSection";
+import { WhySection } from "@/components/sections/WhySection";
+import { landing, type SectionId } from "@/content/landing";
 
-type LandingSection = {
-  id: string;
-  Component: ComponentType;
+const registry: Record<SectionId, ComponentType> = {
+  amount: AmountSection,
+  hero: HeroSection,
+  stats: StatsSection,
+  why: WhySection,
+  eligibility: EligibilitySection,
+  cta: CtaSection,
+  process: ProcessSection,
+  cases: CasesSection,
+  faq: FaqSection,
 };
 
 /**
- * 홈 본문 섹션 순서.
- * 항목을 추가하거나 삭제하고, 배열 순서를 바꾸면 화면 순서가 함께 바뀝니다.
- * Header와 Footer는 공통 레이아웃에서 렌더링합니다.
+ * 홈 본문 섹션 순서와 노출 여부는 src/content/landing.ts 의 `sections` 배열에서 정합니다.
  */
-export const landingSections: LandingSection[] = [
-  { id: "hero", Component: HeroSection },
-  { id: "information", Component: InformationSection },
-  { id: "benefits", Component: BenefitsSection },
-  { id: "process", Component: ProcessSection },
-  { id: "faq", Component: FaqSection },
-];
+export const landingSections = landing.sections
+  .filter((section) => section.visible && registry[section.id])
+  .map((section) => ({ id: section.id, Component: registry[section.id] }));

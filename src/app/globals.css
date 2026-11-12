@@ -2,8 +2,8 @@
 
 :root {
   color-scheme: light;
-  --background: #f3f6fb;
-  --foreground: #10203a;
+  --background: #f2f4f6;
+  --foreground: #191f28;
 }
 
 @theme inline {
@@ -33,5 +33,5 @@ input {
 
 ::selection {
   color: #fff;
-  background: #3768d7;
+  background: #3182f6;
 }
