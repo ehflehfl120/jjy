@@ -15,7 +15,7 @@ export function AmountSection() {
         <h1 className="mt-2 whitespace-pre-line text-[26px] font-bold leading-[1.4] tracking-tight text-[#191F28]">
           {a.title}
         </h1>
-        <p className="mt-3 text-[15px] leading-6 text-[#6B7684]">{a.description}</p>
+        <p className="mt-3 whitespace-pre-line text-[15px] leading-6 text-[#6B7684]">{a.description}</p>
 
         <article className="mt-6 rounded-2xl border border-[#E5E8EB] bg-white p-5 text-left">
           <dl className="space-y-4">

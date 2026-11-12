@@ -35,7 +35,7 @@ export function HeroSection() {
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-[13px] leading-5 text-[#6B7684]">{h.note}</p>
+        <p className="mt-4 whitespace-pre-line text-[13px] leading-5 text-[#6B7684]">{h.note}</p>
       </div>
     </section>
   );
