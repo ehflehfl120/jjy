@@ -542,11 +542,11 @@ export const landing: LandingContent = {
       "timeOptions": [],
       "consentLabel": "개인정보 수집·이용에 동의합니다 (필수)",
       "consentBody": "수집 항목: 이름, 전화번호, 질문 응답 내용\n수집 목적: 채권 회수 상담 및 연락\n보유 기간: 상담 종료 후 1년 (요청 시 즉시 파기)\n동의를 거부할 수 있으며, 거부 시 상담 신청이 제한됩니다.",
-      "submitLabel": "카카오톡 실시간 상담 진행하기"
+      "submitLabel": "상담 신청하기"
     },
     "done": {
       "title": "상담 신청이 접수되었어요",
-      "description": "카카오톡 상담 창으로 이동하고 있어요.\n자동으로 열리지 않으면 아래 버튼을 눌러주세요.",
+      "description": "남겨주신 내용이 접수되었어요.\n아래 버튼을 누르면 카카오톡 실시간 상담으로 연결됩니다.",
       "kakaoLabel": "카카오톡 실시간 상담 진행하기",
       "homeLabel": "처음으로 돌아가기"
     }
