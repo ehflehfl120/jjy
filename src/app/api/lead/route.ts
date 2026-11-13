@@ -60,7 +60,7 @@ export async function POST(request: Request) {
   const row: Record<string, string> = {
     접수시각: new Date().toLocaleString("sv-SE", { timeZone: "Asia/Seoul" }),
     이름: name,
-    연락처: phone.replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3"),
+    전화번호: phone.replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3"),
   };
   // 모든 질문은 필수: 하나라도 비어 있으면 저장하지 않습니다.
   for (const q of survey.questions) {
@@ -71,21 +71,24 @@ export async function POST(request: Request) {
     if (picked.length === 0) return fail(400, `'${q.title}' 질문에 답해 주세요.`);
     row[q.column || q.title] = picked.join(", ");
   }
-  row["연락희망시간"] = time;
-  row["유입경로"] = str(attr.utm_source, 200);
-  row["캠페인"] = str(attr.utm_campaign, 200);
-  row["매체"] = str(attr.utm_medium, 200);
-  row["키워드"] = str(attr.utm_term, 200);
-  row["광고소재"] = str(attr.utm_content, 200);
-  row["이전페이지"] = str(attr.referrer, 300);
-  row["첫방문페이지"] = str(attr.landing_page, 300);
-  row["개인정보동의"] = "동의";
+  // 시트 1행에 있는 열만 보냅니다. 아래 항목은 시트에 열을 추가했을 때만 기록됩니다.
+  const optional: Record<string, string> = {
+    연락희망시간: time,
+    유입경로: str(attr.utm_source, 200),
+    캠페인: str(attr.utm_campaign, 200),
+    매체: str(attr.utm_medium, 200),
+    키워드: str(attr.utm_term, 200),
+    광고소재: str(attr.utm_content, 200),
+    이전페이지: str(attr.referrer, 300),
+    첫방문페이지: str(attr.landing_page, 300),
+    개인정보동의: "동의",
+  };
 
   try {
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ secret, row }),
+      body: JSON.stringify({ secret, row, optional }),
       redirect: "follow",
       cache: "no-store",
     });

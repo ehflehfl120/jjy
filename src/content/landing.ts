@@ -445,7 +445,7 @@ export const landing: LandingContent = {
       },
       {
         "id": "evidence",
-        "column": "보유 자료",
+        "column": "보유자료",
         "title": "가지고 계신 자료를 모두 선택해 주세요",
         "type": "multi",
         "options": [
@@ -473,16 +473,11 @@ export const landing: LandingContent = {
       "title": "상담 받으실 연락처를 남겨주세요",
       "description": "확인 후 빠르게 연락드리겠습니다.",
       "nameLabel": "이름",
-      "phoneLabel": "연락처",
+      "phoneLabel": "전화번호",
       "timeLabel": "연락 받기 편한 시간",
-      "timeOptions": [
-        "언제든 가능",
-        "오전 (09~12시)",
-        "오후 (12~18시)",
-        "저녁 (18시 이후)"
-      ],
+      "timeOptions": [],
       "consentLabel": "개인정보 수집·이용에 동의합니다 (필수)",
-      "consentBody": "수집 항목: 이름, 연락처, 질문 응답 내용\n수집 목적: 채권 회수 상담 및 연락\n보유 기간: 상담 종료 후 1년 (요청 시 즉시 파기)\n동의를 거부할 수 있으며, 거부 시 상담 신청이 제한됩니다.",
+      "consentBody": "수집 항목: 이름, 전화번호, 질문 응답 내용\n수집 목적: 채권 회수 상담 및 연락\n보유 기간: 상담 종료 후 1년 (요청 시 즉시 파기)\n동의를 거부할 수 있으며, 거부 시 상담 신청이 제한됩니다.",
       "submitLabel": "무료 상담 신청하기"
     },
     "done": {

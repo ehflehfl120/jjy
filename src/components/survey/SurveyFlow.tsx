@@ -172,6 +172,7 @@ export function SurveyFlow() {
                   className="w-full rounded-xl border border-[#E5E8EB] bg-[#F9FAFB] px-4 py-3.5 text-[16px] tabular-nums text-[#191F28] outline-none focus:border-[#3182F6] focus:bg-white"
                 />
               </Field>
+              {survey.contact.timeOptions.length > 0 ? (
               <div>
                 <p className="mb-2 text-[13px] font-semibold text-[#4E5968]">{survey.contact.timeLabel}</p>
                 <div className="grid grid-cols-2 gap-2">
@@ -192,6 +193,7 @@ export function SurveyFlow() {
                   ))}
                 </div>
               </div>
+              ) : null}
 
               <input
                 type="text"

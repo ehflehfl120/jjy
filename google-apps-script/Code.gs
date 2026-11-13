@@ -15,24 +15,15 @@ const SECRET = '여기에-비밀값을-넣으세요';
 const HEADERS = [
   '접수시각',
   '이름',
-  '연락처',
+  '전화번호',
   '빌려준금액',
   '돈 종류',
   '갚기로 한 날',
-  '보유 자료',
+  '보유자료',
   '상대방 상황',
-  '연락희망시간',
   '처리상태',
   '담당자',
   '메모',
-  '유입경로',
-  '캠페인',
-  '매체',
-  '키워드',
-  '광고소재',
-  '이전페이지',
-  '첫방문페이지',
-  '개인정보동의',
 ];
 
 function sheet_() {
@@ -51,8 +42,8 @@ function setupHeaders() {
     .setFontWeight('bold')
     .setBackground('#E8F3FF');
   sh.setFrozenRows(1);
-  // 연락처 열은 글자로 저장해 앞자리 0 이 사라지지 않게 합니다.
-  sh.getRange(2, HEADERS.indexOf('연락처') + 1, sh.getMaxRows() - 1, 1).setNumberFormat('@');
+  // 전화번호 열은 글자로 저장해 앞자리 0 이 사라지지 않게 합니다.
+  sh.getRange(2, HEADERS.indexOf('전화번호') + 1, sh.getMaxRows() - 1, 1).setNumberFormat('@');
   sh.autoResizeColumns(1, HEADERS.length);
 }
 
@@ -61,7 +52,9 @@ function doPost(e) {
     const body = JSON.parse(e.postData.contents);
     if (body.secret !== SECRET) return json_({ ok: false, error: 'unauthorized' });
     const row = body.row || {};
-    if (!row['이름'] || !row['연락처']) return json_({ ok: false, error: 'missing required' });
+    // 유입경로·연락희망시간 등: 시트 1행에 그 열을 직접 추가해 두었을 때만 기록합니다.
+    const optional = body.optional || {};
+    if (!row['이름'] || !row['전화번호']) return json_({ ok: false, error: 'missing required' });
 
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
@@ -79,7 +72,7 @@ function doPost(e) {
       });
       sh.appendRow(headers.map(function (h) {
         if (h === '처리상태' && row[h] === undefined) return '신규';
-        return safe_(row[h]);
+        return safe_(row[h] !== undefined ? row[h] : optional[h]);
       }));
     } finally {
       lock.releaseLock();
