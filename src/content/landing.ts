@@ -460,6 +460,18 @@ export const landing: LandingContent = {
         ]
       },
       {
+        "id": "debtor",
+        "column": "상대방 상황",
+        "title": "상대방은 지금 어떤 상황인가요?",
+        "type": "single",
+        "options": [
+          "연락은 되지만 계속 미룸",
+          "연락이 끊김",
+          "일부만 갚고 나머지 미지급",
+          "잘 모르겠음"
+        ]
+      },
+      {
         "id": "debtorType",
         "column": "상대방 구분",
         "title": "돈을 받을 상대방은 누구인가요?",

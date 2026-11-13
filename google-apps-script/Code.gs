@@ -20,14 +20,16 @@ const HEADERS = [
   '돈 종류',
   '갚기로 한 날',
   '보유자료',
+  '상대방 상황',
+  '처리상태',
+  '담당자',
+  '메모',
+  // ↓ 추가 질문 (지급명령 준비용)
   '상대방 구분',
   '상대방 정보',
   '일부 변제',
   '상대방 재산',
   '진행한 조치',
-  '처리상태',
-  '담당자',
-  '메모',
 ];
 
 function sheet_() {
@@ -36,19 +38,30 @@ function sheet_() {
 }
 
 /**
- * 1행(열 제목)을 HEADERS 로 설정합니다.
- * Apps Script 편집기에서 이 함수를 선택하고 ▶ 실행 하면 됩니다. (처음 한 번)
+ * 1행(열 제목) 준비. 이미 있는 열 제목은 절대 바꾸거나 옮기지 않습니다.
+ * - 1행이 비어 있으면 HEADERS 를 그대로 씁니다.
+ * - 1행이 있으면 HEADERS 중 없는 열만 맨 뒤에 추가합니다.
+ * 시트에서 직접 고친 열 이름·순서는 그대로 유지됩니다.
  */
 function setupHeaders() {
   const sh = sheet_();
-  sh.getRange(1, 1, 1, HEADERS.length)
-    .setValues([HEADERS])
-    .setFontWeight('bold')
-    .setBackground('#E8F3FF');
+  const lastCol = sh.getLastColumn();
+  const current = lastCol > 0 ? sh.getRange(1, 1, 1, lastCol).getValues()[0].map(String) : [];
+  const empty = current.every(function (h) { return h === ''; });
+  if (empty) {
+    sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold').setBackground('#E8F3FF');
+  } else {
+    HEADERS.forEach(function (h) {
+      if (current.indexOf(h) === -1) {
+        current.push(h);
+        sh.getRange(1, current.length).setValue(h).setFontWeight('bold').setBackground('#E8F3FF');
+      }
+    });
+  }
   sh.setFrozenRows(1);
   // 전화번호 열은 글자로 저장해 앞자리 0 이 사라지지 않게 합니다.
-  sh.getRange(2, HEADERS.indexOf('전화번호') + 1, sh.getMaxRows() - 1, 1).setNumberFormat('@');
-  sh.autoResizeColumns(1, HEADERS.length);
+  const phoneCol = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0].map(String).indexOf('전화번호') + 1;
+  if (phoneCol > 0) sh.getRange(2, phoneCol, sh.getMaxRows() - 1, 1).setNumberFormat('@');
 }
 
 function doPost(e) {
@@ -64,7 +77,7 @@ function doPost(e) {
     lock.waitLock(10000);
     try {
       const sh = sheet_();
-      if (sh.getLastRow() === 0 || String(sh.getRange(1, 1).getValue()) !== HEADERS[0]) setupHeaders();
+      if (sh.getLastRow() === 0) setupHeaders();
 
       // 현재 1행을 읽고, 사이트에서 새 항목이 오면 맨 뒤에 열을 추가합니다.
       const headers = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0].map(String);
