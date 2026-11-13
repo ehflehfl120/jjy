@@ -89,7 +89,7 @@ export function SurveyFlow() {
       goTo(DONE_STEP);
     } catch (err) {
       setError(
-        `${err instanceof Error ? err.message : "접수 중 문제가 생겼어요."} 잠시 후 다시 시도하시거나 카카오톡으로 바로 문의해 주세요.`,
+        `${err instanceof Error ? err.message : "접수 중 문제가 생겼어요."} 잠시 후 다시 시도해 주세요.`,
       );
     } finally {
       setSubmitting(false);
@@ -245,16 +245,6 @@ export function SurveyFlow() {
             >
               {submitting ? "접수 중…" : survey.contact.submitLabel}
             </button>
-            {error ? (
-              <a
-                href={site.kakaoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex h-14 w-full items-center justify-center rounded-2xl bg-[#FEE500] text-[17px] font-semibold text-[#191919]"
-              >
-                {survey.done.kakaoLabel}
-              </a>
-            ) : null}
           </form>
         ) : null}
 

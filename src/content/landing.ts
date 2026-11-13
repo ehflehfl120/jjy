@@ -566,8 +566,8 @@ export const landing: LandingContent = {
         "value": "(148-62-00877)"
       },
       {
-        "label": "대표변호사",
-        "value": "김가헌"
+        "label": "광고책임 변호사",
+        "value": ": 대표변호사 김가헌"
       },
       {
         "label": "주소",
