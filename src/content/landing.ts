@@ -99,7 +99,7 @@ export type LandingContent = {
     eyebrow: string;
     title: string;
     description: string;
-    questions: { id: string; title: string; type: string; options: string[] }[];
+    questions: { id: string; column: string; title: string; type: string; options: string[] }[];
     contact: {
       title: string;
       description: string;
@@ -409,6 +409,7 @@ export const landing: LandingContent = {
     "questions": [
       {
         "id": "kind",
+        "column": "돈 종류",
         "title": "어떤 돈을 받지 못하셨나요?",
         "type": "single",
         "options": [
@@ -420,6 +421,7 @@ export const landing: LandingContent = {
       },
       {
         "id": "amount",
+        "column": "빌려준금액",
         "title": "받지 못한 금액은 얼마인가요?",
         "type": "single",
         "options": [
@@ -431,6 +433,7 @@ export const landing: LandingContent = {
       },
       {
         "id": "when",
+        "column": "갚기로 한 날",
         "title": "돈을 갚기로 한 날이 언제였나요?",
         "type": "single",
         "options": [
@@ -442,6 +445,7 @@ export const landing: LandingContent = {
       },
       {
         "id": "evidence",
+        "column": "보유 자료",
         "title": "가지고 계신 자료를 모두 선택해 주세요",
         "type": "multi",
         "options": [
@@ -454,6 +458,7 @@ export const landing: LandingContent = {
       },
       {
         "id": "debtor",
+        "column": "상대방 상황",
         "title": "상대방은 지금 어떤 상황인가요?",
         "type": "single",
         "options": [

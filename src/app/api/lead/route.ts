@@ -55,25 +55,28 @@ export async function POST(request: Request) {
       ? (body.attribution as Record<string, unknown>)
       : {};
 
-  // 시트 한 줄: 열 이름 → 값. 질문 문구가 바뀌면 시트에 새 열이 자동으로 생깁니다.
+  // 시트 한 줄: 열 이름(구글시트 1행) → 값.
+  // 질문 열 이름은 landing.ts 의 survey.questions[].column 입니다.
   const row: Record<string, string> = {
     접수시각: new Date().toLocaleString("sv-SE", { timeZone: "Asia/Seoul" }),
     이름: name,
     연락처: phone.replace(/^(\d{3})(\d{3,4})(\d{4})$/, "$1-$2-$3"),
-    연락희망시간: time,
   };
+  // 모든 질문은 필수: 하나라도 비어 있으면 저장하지 않습니다.
   for (const q of survey.questions) {
     const v = rawAnswers[q.id];
     const picked = (Array.isArray(v) ? v : [])
       .filter((o): o is string => typeof o === "string" && q.options.includes(o))
-      .slice(0, q.options.length);
-    row[q.title] = picked.join(", ");
+      .slice(0, q.type === "multi" ? q.options.length : 1);
+    if (picked.length === 0) return fail(400, `'${q.title}' 질문에 답해 주세요.`);
+    row[q.column || q.title] = picked.join(", ");
   }
-  row["유입_utm_source"] = str(attr.utm_source, 200);
-  row["유입_utm_medium"] = str(attr.utm_medium, 200);
-  row["유입_utm_campaign"] = str(attr.utm_campaign, 200);
-  row["유입_utm_term"] = str(attr.utm_term, 200);
-  row["유입_utm_content"] = str(attr.utm_content, 200);
+  row["연락희망시간"] = time;
+  row["유입경로"] = str(attr.utm_source, 200);
+  row["캠페인"] = str(attr.utm_campaign, 200);
+  row["매체"] = str(attr.utm_medium, 200);
+  row["키워드"] = str(attr.utm_term, 200);
+  row["광고소재"] = str(attr.utm_content, 200);
   row["이전페이지"] = str(attr.referrer, 300);
   row["첫방문페이지"] = str(attr.landing_page, 300);
   row["개인정보동의"] = "동의";
