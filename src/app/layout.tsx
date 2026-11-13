@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_KR } from "next/font/google";
+import { AttributionTracker } from "@/components/layout/AttributionTracker";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { site } from "@/content/landing";
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="ko" className={`${notoSansKr.variable} min-h-full antialiased`}>
       <body className="flex min-h-screen justify-center bg-[#F2F4F6] font-sans text-[#191F28]">
         <div className="flex min-h-dvh w-full max-w-[430px] flex-col bg-white">
+          <AttributionTracker />
           <Header />
           {children}
           <Footer />

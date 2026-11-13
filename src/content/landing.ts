@@ -94,6 +94,30 @@ export type LandingContent = {
     description: string;
     items: { question: string; answer: string }[];
   };
+  survey: {
+    enabled: boolean;
+    eyebrow: string;
+    title: string;
+    description: string;
+    questions: { id: string; title: string; type: string; options: string[] }[];
+    contact: {
+      title: string;
+      description: string;
+      nameLabel: string;
+      phoneLabel: string;
+      timeLabel: string;
+      timeOptions: string[];
+      consentLabel: string;
+      consentBody: string;
+      submitLabel: string;
+    };
+    done: {
+      title: string;
+      description: string;
+      kakaoLabel: string;
+      homeLabel: string;
+    };
+  };
   footer: {
     company: { label: string; value: string }[];
     copyright: string;
@@ -377,6 +401,92 @@ export const landing: LandingContent = {
       }
     ]
   },
+  "survey": {
+    "enabled": true,
+    "eyebrow": "회수 가능성 1분 체크",
+    "title": "몇 가지만 알려주시면\n회수 방향을 안내해드려요",
+    "description": "해당하는 항목을 선택해 주세요. 입력하신 내용은 상담 목적으로만 사용됩니다.",
+    "questions": [
+      {
+        "id": "kind",
+        "title": "어떤 돈을 받지 못하셨나요?",
+        "type": "single",
+        "options": [
+          "개인 간 빌려준 돈",
+          "물품·거래 대금",
+          "공사·용역 대금",
+          "기타"
+        ]
+      },
+      {
+        "id": "amount",
+        "title": "받지 못한 금액은 얼마인가요?",
+        "type": "single",
+        "options": [
+          "500만원 미만",
+          "500만원 ~ 3,000만원",
+          "3,000만원 ~ 1억원",
+          "1억원 이상"
+        ]
+      },
+      {
+        "id": "when",
+        "title": "돈을 갚기로 한 날이 언제였나요?",
+        "type": "single",
+        "options": [
+          "1년 이내",
+          "1년 ~ 3년 전",
+          "3년 ~ 5년 전",
+          "5년 이상 지남"
+        ]
+      },
+      {
+        "id": "evidence",
+        "title": "가지고 계신 자료를 모두 선택해 주세요",
+        "type": "multi",
+        "options": [
+          "차용증·계약서",
+          "계좌이체 내역",
+          "카카오톡·문자 대화",
+          "통화 녹음",
+          "자료 없음"
+        ]
+      },
+      {
+        "id": "debtor",
+        "title": "상대방은 지금 어떤 상황인가요?",
+        "type": "single",
+        "options": [
+          "연락은 되지만 계속 미룸",
+          "연락이 끊김",
+          "일부만 갚고 나머지 미지급",
+          "잘 모르겠음"
+        ]
+      }
+    ],
+    "contact": {
+      "title": "상담 받으실 연락처를 남겨주세요",
+      "description": "확인 후 빠르게 연락드리겠습니다.",
+      "nameLabel": "이름",
+      "phoneLabel": "연락처",
+      "timeLabel": "연락 받기 편한 시간",
+      "timeOptions": [
+        "언제든 가능",
+        "오전 (09~12시)",
+        "오후 (12~18시)",
+        "저녁 (18시 이후)"
+      ],
+      "consentLabel": "개인정보 수집·이용에 동의합니다 (필수)",
+      "consentBody": "수집 항목: 이름, 연락처, 질문 응답 내용\n수집 목적: 채권 회수 상담 및 연락\n보유 기간: 상담 종료 후 1년 (요청 시 즉시 파기)\n동의를 거부할 수 있으며, 거부 시 상담 신청이 제한됩니다.",
+      "submitLabel": "무료 상담 신청하기"
+    },
+    "done": {
+      "title": "상담 신청이 접수되었어요",
+      "description": "담당자가 확인 후 연락드립니다.\n카카오톡으로 바로 상담을 이어가실 수도 있어요.",
+      "kakaoLabel": "카카오톡으로 바로 상담하기",
+      "homeLabel": "처음으로 돌아가기"
+    }
+  },
   "footer": {
     "company": [
       {
@@ -422,3 +532,4 @@ export const landing: LandingContent = {
 export const site = landing.site;
 export const footer = landing.footer;
 export const legal = landing.legal;
+export const survey = landing.survey;

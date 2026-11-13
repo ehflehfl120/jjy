@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { landing } from "@/content/landing";
 
 type KakaoButtonProps = {
@@ -12,15 +13,24 @@ const variants = {
   white: "bg-white text-[#191F28]",
 };
 
-/** 상담 링크 버튼. 링크 주소는 landing.site.kakaoUrl 에서 수정합니다. */
+/**
+ * 상담 버튼.
+ * - landing.survey.enabled 가 true 이면 질문지(/survey)로 이동합니다.
+ * - false 이면 landing.site.kakaoUrl(카카오톡 채널)로 바로 연결합니다.
+ */
 export function KakaoButton({ label, variant = "primary", className = "" }: KakaoButtonProps) {
+  const classes = `inline-flex h-14 w-full items-center justify-center rounded-2xl px-5 text-center text-[17px] font-semibold leading-6 ${variants[variant]} ${className}`;
+
+  if (landing.survey.enabled) {
+    return (
+      <Link href="/survey" className={classes}>
+        {label}
+      </Link>
+    );
+  }
+
   return (
-    <a
-      href={landing.site.kakaoUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex h-14 w-full items-center justify-center rounded-2xl px-5 text-center text-[17px] font-semibold leading-6 ${variants[variant]} ${className}`}
-    >
+    <a href={landing.site.kakaoUrl} target="_blank" rel="noopener noreferrer" className={classes}>
       {label}
     </a>
   );
