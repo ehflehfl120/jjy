@@ -87,6 +87,8 @@ export function SurveyFlow() {
       const data = await res.json().catch(() => null);
       if (!res.ok || !data?.ok) throw new Error(data?.message || "접수 중 문제가 생겼어요.");
       goTo(DONE_STEP);
+      // 저장이 끝나면 바로 카카오톡 채널 상담으로 이동합니다. (완료 화면은 이동이 막힐 때를 위한 대비)
+      window.location.href = site.kakaoUrl;
     } catch (err) {
       setError(
         `${err instanceof Error ? err.message : "접수 중 문제가 생겼어요."} 잠시 후 다시 시도하시거나 카카오톡으로 바로 문의해 주세요.`,
